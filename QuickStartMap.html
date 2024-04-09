@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+      
+    <meta charset='utf-8' />
+    <title>University of Oregon Mapping</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+      
+    <!--    Include the reference to the Mapbox JavaScript here in the <head> of the page    -->
+      <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js'></script>
+      
+    <!--    Include the reference to the Mapbox CSS here in the <head> of the page    -->
+      <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css' rel='stylesheet' />
+
+    <style>
+        /* Insert the CSS code here between the <style> tags */
+          body { margin:0; padding:0; }
+      #map { position:absolute; top:0; bottom:0; width:100%; }
+        
+          #title { z-index: 9999; 
+        background-color:#F1C40F; 
+        opacity: 80%; 
+        text-align: center}
+    </style>
+      
+  </head>
+
+  <body>
+    <!--  Insert the map div here in the <body> of the page  -->
+        <div id='map'></div>
+    <!--  Insert the tile div here (part V) -->
+        <div id='title'>
+     		<h1>Kyle's Silly Map of Portland<h2/>
+     		<h2>By: Kyle Marcelino</h2>	 
+        </div>
+    <script>
+        // Insert the JavaScript within the <script> tags, within the body   
+        // Start with the Mapbox access token here
+        mapboxgl.accessToken = 'pk.eyJ1IjoicmFkdGFkcG9sZSIsImEiOiJjbHVsaGpzNnExNDM4MmpudXMyamFpZTM2In0.rNrtDKpfSzqAa6PxIn_Wjw'; 
+        //  Put your access token between the single quotes.
+   
+        // Then initialize the map here
+        var map = new mapboxgl.Map({
+     container: 'map', // id of a div on your page, where the map will be inserted
+     style: 'mapbox://styles/radtadpole/clulk7qhn00vc01racq2xfsmv', // stylesheet location
+     center: [-122.6788, 45.5212], // starting position [lng, lat] eg. [-122.6788, 45.5212]
+     zoom: 11 // starting zoom 
+ });
+        // Add popup markers here  (part IV)
+         var popup = new mapboxgl.Popup({ offset: 25 })
+     .setHTML('Hello World. Welcome to Portland!');
+        
+         var popup_layer = new mapboxgl.Popup({closeOnClick: true})
+     .setLngLat([-122.64, 45.5]) //popup coordinates
+     .setHTML('<h1>Hi bingbong!</h1>') //popup text
+     .addTo(map); //add this popup to the map!
+        
+        var popup_layer_mi_biblioteca = new mapboxgl.Popup({
+       closeOnClick: false, anchor: 'top-right'})
+     .setLngLat([-122.673308, 45.522675])
+     .setHTML('<a href="https://www.cerritoslibrary.us/">Mi biblioteca</a>')
+     .addTo(map);
+        
+         var popup_layer_IKEA = new mapboxgl.Popup({
+       closeOnClick: false, anchor: 'top-right'})
+     .setLngLat([-122.55416675083845, 45.573780520860204])
+     .setHTML('<a href="https://www.ikea.com/us/en/stores/portland/?utm_source=google&utm_medium=organic&utm_campaign=map&utm_content=portland">IKEA YAY!</a>')
+     .addTo(map);
+        
+        // Add any other variables such as markers here (part III)
+         var marker = new mapboxgl.Marker({color:'#DED917'})
+     .setLngLat([-122.6788, 45.5212])
+     .setPopup(popup) //add the popup with the variable name 'popup' to the marker 
+     .addTo(map); // add the open marker to the map
+        var marker2 = new mapboxgl.Marker({color:'#DED917'})
+     .setLngLat([-122.55416675083845, 45.573780520860204])
+     .addTo(map); // add the open marker to the map
+        
+        // Add optional advanced "On load" function here
+    
+    </script>
+
+  </body>
+
+</html>
