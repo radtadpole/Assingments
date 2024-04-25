@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <title>Fixed Map</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <!--    1.1.  Include the reference to the Mapbox JavaScript here in the <head> of the page  -->
+        <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.js'></script>
+    <!--    1.2 Include the reference to the Mapbox CSS here in the <head> of the page  -->
+        <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        /* 1.4 Insert the CSS code here between the <style> tags */
+             body {background-color: cadetblue; margin:50px; padding: 0; border: 0px solid black; }
+        
+             #map1 {position:relative; height:900px; width:70%; left: 15%;}
+        /* 2.5.2 Insert additional CSS code here between the <style> tags */
+             #map2 {position:relative; height:900px; width:70%; left: 15%;}
+        
+             #map3 {position:relative; height:900px; width:70%; left: 15%;}
+        
+             #title {z-index: 9999; background-color:#F1C40F; opacity: 80%; text-align: center; font-family:"Garamond"; border-radius: 9px; padding: 30px}
+        
+             p1 {font-family: "Garamond"; font-size: 25px}
+        
+             p {text-indent: 0px; text-align: center; font-size: 25px}
+             
+    </style>
+
+  <body>
+        <!-- 1.3 Insert the div for the structure of the page here in the <body> of the page -->
+      <div id="title" ><h1>Journey of a "Military Brat"</h1>
+          <p1> Below are a set of three maps which show the locations of the first few places I (Kyle) have lived growing up. My childhood was very unqiue in that my family and I were always on the move and adept to change, of which I believe has led me to my disposition towards geography.<p1>
+      </div>   
+  <hr>
+      
+<h2> Map 1: Fussa, Tokyo, Japan </h2>
+      <p> This map centers around the Yokota Air Base where I lived for 3 years. </p>
+         <div id='map1'></div>
+  <hr>
+      
+  <h2> Map 2: U.S. Virgin Islands, St.Croix </h2>
+      <p> <p> This map centers around my home in Green Cay, Christiansted, St.Croix where I lived for 2 years. </p>
+         <div id='map2'></div>
+  <hr>
+      
+  <h2> Map 3: Suffolk, Virginia </h2>
+      <p> This map centers around my home in Suffolk, Virginia where I lived for 3 years. </p>
+         <div id='map3'></div> 
+    
+       <script>
+            /* Insert the JavaScript within the <script> tags, within the body */
+            // 2.1 Start with the Mapbox access token
+mapboxgl.accessToken = 'pk.eyJ1IjoicmFkdGFkcG9sZSIsImEiOiJjbHVsaGpzNnExNDM4MmpudXMyamFpZTM2In0.rNrtDKpfSzqAa6PxIn_Wjw';
+            //  Put your access token between the single quotes.
+
+            // 2.2 Then initialize the first map
+  var map = new mapboxgl.Map({
+       container: 'map1', // id of a div on your page, where the map will be inserted
+       style: 'mapbox://styles/mapbox/streets-v11', // the style URL 'mapbox://styles/mapbox/streets-v11' 
+       center: [139.348053,35.7477685], // starting position [lng, lat] eg. [-122.6788, 45.5212]
+       zoom: 11 // starting zoom
+  });
+
+            // 2.3 Add any other variables (such as popups and markers) to the first map
+  var popup = new mapboxgl.Popup({anchor: 'left', maxWidth: 'none'})
+      .setHTML('<img src="yokota.jpg"width="500" height="350"><br>Yokota Air Base')
+  
+  var marker = new mapboxgl.Marker({color:'firebrick'})
+      .setLngLat([139.348053,35.7477685]) // starting position [lng, lat]
+      .setPopup(popup) //add the popup named "popup" to this marker 
+      .addTo(map); // add it to the map with the ID "map"
+      
+            // 2.4 Add arguments to disable the map interactivity here
+            // Disable drag and zoom handlers.
+               map.dragPan.disable();
+               map.scrollZoom.disable();
+               map.boxZoom.disable();
+               map.dragRotate.disable();
+               map.keyboard.disable();
+               map.doubleClickZoom.disable();
+               map.touchZoomRotate.disable();
+               map.touchZoomRotate.disableRotation();
+
+            // 2.5.3 Then initialize the 2nd map
+   var map2 = new mapboxgl.Map({
+        container: 'map2', // id of a div on your page, where the map will be inserted
+        style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
+        center: [-64.65176039012293,17.758053219266714], // starting position [lng, lat] eg. [-122.6788, 45.5212]
+        zoom: 11 // starting zoom 
+    });
+
+            // 2.5.4 Add any other variables (such as markers) to the second map
+
+   var popup2 = new mapboxgl.Popup({anchor: 'left', maxWidth: 'none'})
+        .setHTML('<img src="st.croix.jpg"width="500" height="350"><br>Green Cay #73, Christiansted, VI 00820<br>MAPBOX: -64.65176039012293,17.758053219266714<br>GOOGLE MAPS: 17.75796690897758, -64.65182292186306')
+       
+    
+   var marker2 = new mapboxgl.Marker({color:'firebrick'})
+        .setLngLat([-64.65176039012293,17.758053219266714]) // starting position [lng, lat] 
+        .setPopup(popup2) //add the popup to the marker 
+        .addTo(map2); // id it to the map with the ID *map2*
+            // 2.5.5 Add arguments to disable the second map's interactivity here
+           map2.dragPan.disable();
+           map2.scrollZoom.disable();
+           map2.boxZoom.disable();
+           map2.dragRotate.disable();
+           map2.keyboard.disable();
+           map2.doubleClickZoom.disable();
+           map2.touchZoomRotate.disable();
+           map2.touchZoomRotate.disableRotation();
+           
+   var map3 = new mapboxgl.Map({
+        container: 'map3', // id of a div on your page, where the map will be inserted
+        style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
+        center: [-76.473304,36.851105], // starting position [lng, lat] eg. [-122.6788, 45.5212]
+        zoom: 11 // starting zoom 
+    });
+
+            // 2.5.4 Add any other variables (such as markers) to the second map
+
+   var popup3 = new mapboxgl.Popup({anchor: 'left', maxWidth: 'none'})
+        .setHTML('<img src = "suffolk.jpg"" style="max-width:500px"><br>3503 Sedgefield St, Suffolk, VA 23435')
+        
+   var marker3 = new mapboxgl.Marker({color:'firebrick'})
+        .setLngLat([-76.473304,36.851105]) // starting position [lng, lat] 
+        .setPopup(popup3) //add the popup to the marker 
+        .addTo(map3); // id it to the map with the ID *map2*
+            // 2.5.5 Add arguments to disable the second map's interactivity here
+           map3.dragPan.disable();
+           map3.scrollZoom.disable();
+           map3.boxZoom.disable();
+           map3.dragRotate.disable();
+           map3.keyboard.disable();
+           map3.doubleClickZoom.disable();
+           map3.touchZoomRotate.disable();
+           map3.touchZoomRotate.disableRotation();
+
+            // 2.6 Change the map pointers
+                map.getCanvas().style.cursor = 'auto';
+                map2.getCanvas().style.cursor = 'auto';
+                map3.getCanvas().style.cursor = 'auto';
+        </script>
+  </body>
+      
+</html>
